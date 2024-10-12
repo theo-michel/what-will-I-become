@@ -2,6 +2,7 @@
 image_generation/input_images/*
 image_generation/output_images/*
 conf.env
+__pycache__
 
 !image_generation/input_images/.gitkeep
 !image_generation/output_images/.gitkeep
