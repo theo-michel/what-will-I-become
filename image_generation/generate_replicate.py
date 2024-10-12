@@ -22,8 +22,7 @@ class ImageGenerator:
                        prompt: str, 
                        input_images_path: str,
                        num_steps: int = 50, 
-                       negative_prompt: Optional[str] = None,
-                       output_directory: str = "output_images") -> List[str]:
+                       negative_prompt: Optional[str] = None) -> List[str]:
         # Prepare input dictionary
         input_data = {
             "prompt": prompt,
@@ -51,30 +50,30 @@ class ImageGenerator:
             input=input_data
         )
 
-        # Create output directory if it doesn't exist
-        os.makedirs(output_directory, exist_ok=True)
+        base64_images = []
 
-        saved_images = []
-
-        # Download and save each output image
-        for i, image_url in enumerate(output):
+        # Download and convert each output image to base64
+        for image_url in output:
             response = requests.get(image_url)
             if response.status_code == 200:
                 img = Image.open(BytesIO(response.content))
-                filename = f"output_image_{i+1}.png"
-                filepath = os.path.join(output_directory, filename)
-                img.save(filepath)
-                saved_images.append(filepath)
-                print(f"Saved image: {filepath}")
+                buffered = BytesIO()
+                img.save(buffered, format="PNG")
+                img_str = base64.b64encode(buffered.getvalue()).decode()
+                base64_images.append(img_str)
+                print(f"Processed image to base64")
             else:
-                print(f"Failed to download image {i+1}")
+                print(f"Failed to download image")
 
-        print("All images have been processed and saved.")
-        return saved_images
+        print("All images have been processed to base64.")
+        return base64_images
 
 # Example usage:
-# generator = ImageGenerator("../conf.env")
-# output_paths = generator.generate_image(
-#     prompt="A photo of a happy and fit man img",
-#     input_images_path="input_images"
-# )
+if __name__ == "__main__":
+  generator = ImageGenerator("../conf.env")
+  base64_images = generator.generate_image(
+      prompt="A photo of a happy and fit man img",
+      input_images_path="input_images"
+  )
+
+  print(base64_images)
