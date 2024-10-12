@@ -11,8 +11,8 @@ class ProgramGenerator:
         REGION = os.getenv('LOCATION')
         vertexai.init(project=PROJECT_ID, location=REGION)
 
-        self.system_instruction_program = open("system_instruction_program.txt", "r").read()
-        self.system_instruction_category_completion = open("system_instruction_category_completion.txt", "r").read()
+        self.system_instruction_program = open("program_creation/system_instruction_program.txt", "r").read()
+        self.system_instruction_category_completion = open("program_creation/system_instruction_category_completion.txt", "r").read()
 
         self.model_program = GenerativeModel("gemini-1.5-pro-002", system_instruction=self.system_instruction_program)
         self.model_category_completion = GenerativeModel("gemini-1.5-pro-002", system_instruction=self.system_instruction_category_completion)

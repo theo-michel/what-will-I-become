@@ -6,3 +6,5 @@ __pycache__
 
 !image_generation/input_images/.gitkeep
 !image_generation/output_images/.gitkeep
+# Ignore virtual environment
+venv/

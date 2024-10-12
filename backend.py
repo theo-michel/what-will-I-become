@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from image_generation.generate_replicate import ImageGenerator
 from model.request_schema import ImageGenerationRequest, ImageGenerationResponse, ProgramRequest
-from program_creation import ProgramGenerator
+from program_creation.program_creation import ProgramGenerator
 import uvicorn
 
 app = FastAPI()
