@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from image_generation.generate_replicate import ImageGenerator
-from model.request_schema import ImageGenerationRequest, ImageGenerationResponse, ProgramRequest
 from program_creation.program_creation import ProgramGenerator
+from model.request_schema import ImageGenerationRequest, ImageGenerationResponse, ProgramRequest, SimulateLifeRequest
+from simulate_life.simulate_life import LifeSimulator
 import uvicorn
 
 app = FastAPI()
@@ -41,8 +42,17 @@ async def generate_habits_category(request: ProgramRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/simulate-life")
+async def simulate_life(request: SimulateLifeRequest):
+    try:
+        life_simulator = LifeSimulator()
+        life_simulation = life_simulator.get_evolution_given_program(
+                request.initial_state, request.program, request.time_horizon
+        )
+        return {"life_simulation": life_simulation}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
 
