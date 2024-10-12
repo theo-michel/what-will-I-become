@@ -16,4 +16,4 @@ EXAMPLE_PROGRAM = """Lifestyle
     Sport
     Regular physical activity: Incorporate regular physical activity into your routine, even if it's just a short walk or some stretching. Exercise can improve sleep quality and reduce stress."""
 
-EXAMPLE_TIME_HORIZON = 15
+EXAMPLE_TIME_HORIZON = 2

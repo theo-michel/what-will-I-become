@@ -24,6 +24,7 @@ def extract_dict_from_actions(actions: str):
 
 def format_actions_output(actions: str) -> dict:
     dict_actions = extract_dict_from_actions(actions)
+    dict_actions
     return json.loads(dict_actions)
 
 
@@ -74,7 +75,7 @@ class LifeSimulator:
         Returns:
             dict: Result with the chosen actions.
         """
-        prompt = f"""I present you someone's state that describes their health state and habits : { state }. They received those recommendations from their personal coach: { program }. This is an ideal program, which means that they might not be able to respect each step of the program (it depends on their motivation, their objectives, etc… and all information that you can find in their state. Your goal is to find the realistic actions that they are going to do during the next week, based on their current state and the program they are given. Your goal is not to take the optimal actions but the most realistic ones based on their characteristics. The actions are split into different categories : { self.categories_actions }. For each category, you must choose 1 and only 1 action to take, the one that is the most probable according to you. If you do not have any information on a given category, return 'I do not have any information on that category' and do not invent anything. You must then output your actions as a string with the following json format (without forgetting the brackets) : 'category_1' : 'action_1', 'category_2': 'action_2', etc…"""
+        prompt = f"""I present you someone's state that describes their health state and habits : { state }. They received those recommendations from their personal coach: { program }. This is an ideal program, which means that they might not be able to respect each step of the program (it depends on their motivation, their objectives, etc… and all information that you can find in their state. Your goal is to find the realistic actions that they are going to do during the next week, based on their current state and the program they are given. Your goal is not to take the optimal actions but the most realistic ones based on their characteristics. The actions are split into different categories : { self.categories_actions }. For each category, you must choose 1 and only 1 action to take, the one that is the most probable according to you. If you do not have any information on a given category, return 'I do not have any information on that category' and do not invent anything. You may decide not to do anything : if so, you must specify it by returning 'none' for the concerned category. When returning the actions, you must use the first person at the present time. for You must then output your actions as a string with the following json format (without forgetting the brackets) : "category_1" : 'action_1', "category_2": 'action_2', etc…"""
 
         actions = self.generate_content(prompt)
         return actions
@@ -90,7 +91,7 @@ class LifeSimulator:
         Returns:
             str: Next state at time t+1.
         """
-        prompt = f"""I present you someone's state that describes the health state and habits that they had at the beginning of the week : { state }. During this week, they took many actions regarding different categories : { actions }. These actions are all they did during this week. You must not assume that they did something else during this week. Your goal is to determine their state at the end of the week. This new state must take into account their characteristics and the actions that they have taken during the week. Be careful and take into consideration that turning an action into a habit takes times, so their state cannot change drastically in a week. If a category contains 'I do not have any information on that category', do not take it into consideration. You must not invent something for those categories, so do not write something if you do not have any information on it. Your result must then be the realistic and probable one. You should then output the new state as a string. The format must be detailed and precise but as concise as possible."""
+        prompt = f"""I present you someone's state that describes the health state and habits that they had at the beginning of the week : { state }. During this week, they took many actions regarding different categories : { actions }. These actions are all they did during this week. You must not assume that they did something else during this week. Your goal is to determine their state at the end of the week. This new state must take into account their characteristics and the actions that they have taken during the week. Be careful and take into consideration that turning an action into a habit takes times, so their state cannot change drastically in a week. If a category contains 'I do not have any information on that category', do not take it into consideration. You must not invent something for those categories, so do not write something if you do not have any information on it. Your result must then be the realistic and probable one. You should then output the new state as a string. The format must be detailed and precise but as concise as possible. And finally, you must use the first person at the present time."""
         next_state = self.generate_content(prompt)
         return next_state
 
@@ -109,7 +110,7 @@ class LifeSimulator:
             tuple: Tuple containing the list of actions and the list of states.
         """
         all_actions = []
-        all_states = [initial_state]
+        all_states = []
         for t in range(time_horizon):
             actions = self.get_actions_from_program_and_state(program, initial_state)
             formatted_actions = format_actions_output(actions)
