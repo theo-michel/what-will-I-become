@@ -5,7 +5,11 @@ import json
 from dotenv import load_dotenv
 import os
 
-from input_examples import EXAMPLE_INITIAL_STATE, EXAMPLE_PROGRAM, EXAMPLE_TIME_HORIZON
+from simulate_life.explo.input_examples import (
+    EXAMPLE_INITIAL_STATE,
+    EXAMPLE_PROGRAM,
+    EXAMPLE_TIME_HORIZON,
+)
 
 
 def extract_dict_from_actions(actions: str):
