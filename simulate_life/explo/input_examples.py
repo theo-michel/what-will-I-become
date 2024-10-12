@@ -2,6 +2,8 @@
 
 EXAMPLE_INITIAL_STATE = "I do not have a good hygiene of life. I do not sleep much, and because of my work I cannot sleep more than 6 hours a night. I smoke a lot of cigarettes (I cannot stop smoking). I eat a lot of processed food but I want to start eating healthy."
 
+EXAMPLE_INITIAL_STATE_2 = "I have overall a quite good hygiene. I drink a lot of water, I sleep quite well (10p.m-6a.m). I go to the gym 3 times a week. But now, I really want to reach the next level. I want to start running to get more endurant. And I want to eat better since I eat very often processed food. I am super motivated and I want to make a significant change in my life."
+
 EXAMPLE_PROGRAM = """Lifestyle
     Establish a regular sleep schedule: Maintain a consistent sleep-wake cycle, even on weekends, to regulate your body's natural sleep-wake rhythm.
     Optimize your sleep environment: Create a relaxing bedtime routine to signal to your body that it's time to sleep. This could include taking a warm bath, reading a book, or listening to calming music.

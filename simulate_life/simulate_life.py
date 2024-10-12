@@ -7,6 +7,7 @@ import os
 
 from simulate_life.explo.input_examples import (
     EXAMPLE_INITIAL_STATE,
+    EXAMPLE_INITIAL_STATE_2,
     EXAMPLE_PROGRAM,
     EXAMPLE_TIME_HORIZON,
 )
