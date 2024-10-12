@@ -5,7 +5,7 @@ import ast
 import json
 
 #%% 
-PROJECT_ID = "mistral-alan-hack24par-810"
+PROJECT_ID = # Load project ID
 REGION = "us-central1"
 vertexai.init(project=PROJECT_ID, location=REGION)
 
