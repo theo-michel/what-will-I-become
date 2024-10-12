@@ -56,7 +56,8 @@ class ProgramGenerator:
 
     def display_habits_category(self, habits):
         for domain, description in habits.items():
-            print(f"{domain}: {description}")     
+            print(f"{domain}: {description}")   
+  
 if __name__ == "__main__":
 # Usage example:
   generator = ProgramGenerator()
