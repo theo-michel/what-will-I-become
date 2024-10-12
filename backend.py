@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from image_generation.generate_replicate import ImageGenerator
 from program_creation.program_creation import ProgramGenerator
 from model.request_schema import ImageGenerationRequest, ImageGenerationResponse, ProgramRequest, SimulateLifeRequest
@@ -6,6 +7,15 @@ from simulate_life.simulate_life import LifeSimulator
 import uvicorn
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Add your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/generate-image", response_model=ImageGenerationResponse)
 async def generate_image(request: ImageGenerationRequest):
@@ -55,4 +65,3 @@ async def simulate_life(request: SimulateLifeRequest):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
